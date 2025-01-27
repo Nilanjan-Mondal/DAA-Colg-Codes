@@ -2,7 +2,6 @@
 
 int count  = 0;
 
-// Recursive function to find the maximum and minimum in the array
 void findMaxMin(int arr[], int start, int end, int *maxVal, int *minVal) {
 
 // TC = 3n/2 - 2 = O(n) for divide and conquer
@@ -28,12 +27,11 @@ void findMaxMin(int arr[], int start, int end, int *maxVal, int *minVal) {
     }
 
     else {
-        // comparisons need to be done only when recursion calles are made
-        count++;  //  kotobar array ta divide korbe
+        count += 2;  // for 2 recursive calls 
+
         // Divide the array into two halves
         int mid = (start + end) / 2;
 
-        // Variables to store results of left and right halves
         int leftMax, leftMin, rightMax, rightMin;
 
         // Recursively find max and min for left half
@@ -42,7 +40,6 @@ void findMaxMin(int arr[], int start, int end, int *maxVal, int *minVal) {
         // Recursively find max and min for right half
         findMaxMin(arr, mid + 1, end, &rightMax, &rightMin);
 
-        // Combine results
         *maxVal = (leftMax > rightMax) ? leftMax : rightMax;
         *minVal = (leftMin < rightMin) ? leftMin : rightMin;
     }
@@ -51,17 +48,14 @@ void findMaxMin(int arr[], int start, int end, int *maxVal, int *minVal) {
 }
 
 int main() {
-    // Input array
+
     int arr[] = {12, 3, 5, 7, 19, -4, 8, 4, 8, 10};
     int size = sizeof(arr) / sizeof(arr[0]);
 
-    // Variables to store the result
     int maxVal, minVal;
 
-    // Call the recursive function
     findMaxMin(arr, 0, size - 1, &maxVal, &minVal);
 
-    // Output the results
     printf("Maximum: %d\n", maxVal);
     printf("Minimum: %d\n", minVal);
     printf("Count: %d\n", count);
